@@ -5,7 +5,7 @@ from flask import Blueprint, flash, render_template, redirect, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from . import db
-from flask_login import login_user
+from flask_login import login_required, login_user, logout_user
 
 auth = Blueprint('auth', __name__)
 
@@ -28,7 +28,7 @@ def sign_in_post():
         return redirect(url_for('auth.sigh_in'), code=400) # if user doesn`t exist or password was incorrect - return error and redirect to m
     else:
         login_user(user, remember=remember)
-        return redirect(url_for('main.index'), code=400) # if user exists redirect to homepage
+        return redirect(url_for('main.index')) # if user exists redirect to homepage
 
 @auth.route('/signup')
 def sign_up():
@@ -68,6 +68,12 @@ def sign_up_post():
     db.session.commit()
 
     # redirect user to a homepage
+    return redirect(url_for('main.index'))
+
+@auth.route('/signout')
+@login_required
+def sign_out():
+    logout_user()
     return redirect(url_for('main.index'))
 
 

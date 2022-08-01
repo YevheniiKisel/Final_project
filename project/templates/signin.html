@@ -10,14 +10,14 @@
             </div>
         {% endif %}
     {% endwith %}
-    <form method="POST" action="/login">
-    <form action="/login" method="POST">
+    <form action="/signin" method="POST">
         <div>
             <input type="email" placeholder="Your email" name="email">
             <input type="password" placeholder="Password" name="password">
             <label>Remember me
                 <input type="checkbox" name="remember">
             </label>
+            <button type="submit">Sign in</button>
         </div>
     </form>
     <p>Here will be background image hero-text</p>

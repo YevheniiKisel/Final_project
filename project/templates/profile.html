@@ -2,6 +2,11 @@
 
 
 {% block main %}
-<h1>This is profile</h1>
-<p>Here will be information about user`s orders, questions, Subsciption state</p>
+    <h1>This is profile</h1>
+    {% if not name %}
+        <p>Hello there!</p>
+    {% else %}
+        <p>Hello, {{ name }}!</p>    
+    {% endif %}
+    <p>Here will be information about user`s orders, questions, Subsciption state</p>
 {% endblock %}

@@ -11,14 +11,6 @@ def create_app():
     app.config['SECRET_KEY'] = '409734c554b6a7db12c67ae7aa286313e90859b4c44b9113343f9dba19116729'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dieBlume.sqlite'
 
-    # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
-
-    # blueprint for non-auth parts of app
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-
     db.init_app(app)
 
     login_manager = LoginManager()
@@ -30,3 +22,15 @@ def create_app():
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    # blueprint for auth routes in our app
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
+
+    # blueprint for non-auth parts of app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
+
+
