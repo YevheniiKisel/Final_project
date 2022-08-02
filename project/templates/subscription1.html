@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/subscription.css">
+{% endblock %}
+
+
+{% block main %}
+    {% if current_user.is_authenticated %}
+    <!-- form where will be my qustionnaire-->
+        <div class="container">
+            <form action="/subscription" method="post">
+                <!-- first step -->
+                <div class="step step-1">
+                    <!-- section with frequensy (delivery / per week)-->
+                    <div>
+                        <!-- first radio button <1 per week> -->
+                        <div class="list-group">
+                            <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
+                            <label class="btn btn-outline-success" for="1perWeek">
+                                <div class="d-flex justify-content-between w-100">
+                                    <h3>1 delivery / week</h3>
+                                    <small>150 PLN</small>
+                                </div>
+                                <p style="text-align:left;">Good choise for home or as a present.</p>
+                            </label>
+                        </div>
+                        <!-- second radio button <2 per week>-->
+                        <div class="list-group">
+                            <input type="radio" name="perWeek" id="2perWeek" class="list-group-item-check pe-none" value="2">
+                            <label class="btn btn-outline-success" for="2perWeek">
+                                <div class="d-flex justify-content-between w-100">
+                                    <h3>2 deliveries / week</h3>
+                                    <small>280 PLN</small>
+                                </div>
+                                <p style="text-align:left;">Pefrect solution for business</p>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- section with duration (how many month)-->
+                    <div>
+                        <!-- first radio button <3 month> -->
+                            <div class="list-group">
+                                <input type="radio" name="durationMonth" id="3month" class="list-group-item-check pe-none" value="3">
+                                <label class="btn btn-outline-success" for="3month">
+                                    <div class="d-block justify-content-between w-100">
+                                        <h3>3</h3>
+                                        <p>month</p>
+                                    </div>
+                                </label>
+                            </div>
+                        <!-- second radio button <6 month> -->
+                            <div class="list-group">
+                                <input type="radio" name="durationMonth" id="6month" class="list-group-item-check pe-none" value="6">
+                                <label class="btn btn-outline-success" for="6month">
+                                    <div class="d-block justify-content-between w-100">
+                                        <h3>6</h3>
+                                        <p>month</p>
+                                    </div>
+                                </label>
+                            </div>
+                        <!-- third radio button <12 month> -->
+                            <div class="list-group">
+                                <input type="radio" name="durationMonth" id="12month" class="list-group-item-check pe-none" value="12">
+                                <label class="btn btn-outline-success" for="12month">
+                                    <div class="d-block justify-content-between w-100">
+                                        <h3>12</h3>
+                                        <p>month</p>
+                                    </div>
+                                </label>
+                            </div>
+
+
+                    </div>                       
+                    
+
+
+
+
+
+
+            </form>    
+        </div>
+
+    {% endif %}
+{% endblock %}

@@ -16,7 +16,7 @@ def profile():
 
 @main.route('/subscription')
 def subscription():
-    return "This is subscription. TODO"
+    return render_template("subscription1.html")
 
 @main.route('/bouquet')
 def bouquet():
