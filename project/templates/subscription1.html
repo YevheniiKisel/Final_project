@@ -13,29 +13,25 @@
                 <!-- first step -->
                 <div class="step step-1">
                     <!-- section with frequensy (delivery / per week)-->
-                    <div>
+                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
                         <!-- first radio button <1 per week> -->
-                        <div class="list-group">
-                            <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
-                            <label class="btn btn-outline-success" for="1perWeek">
-                                <div class="d-flex justify-content-between w-100">
-                                    <h3>1 delivery / week</h3>
-                                    <small>150 PLN</small>
-                                </div>
-                                <p style="text-align:left;">Good choise for home or as a present.</p>
-                            </label>
-                        </div>
+                        <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
+                        <label class="list-group-item rounded-3 py-3" for="1perWeek">
+                            <div class="d-flex justify-content-between w-100">
+                                <h3>1 delivery / week</h3>
+                                <small>Base price: 150 PLN</small>
+                            </div>
+                            <p class="leftAlign">Good choise for home or as a present.</p>
+                        </label>
                         <!-- second radio button <2 per week>-->
-                        <div class="list-group">
                             <input type="radio" name="perWeek" id="2perWeek" class="list-group-item-check pe-none" value="2">
-                            <label class="btn btn-outline-success" for="2perWeek">
+                            <label class="list-group-item rounded-3 py-3" for="2perWeek">
                                 <div class="d-flex justify-content-between w-100">
                                     <h3>2 deliveries / week</h3>
-                                    <small>280 PLN</small>
+                                    <small>Base price: 280 PLN</small>
                                 </div>
-                                <p style="text-align:left;">Pefrect solution for business</p>
+                                <p class="leftAlign">Pefrect solution for business</p>
                             </label>
-                        </div>
                     </div>
 
                     <!-- section with duration (how many month)-->

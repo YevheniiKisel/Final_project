@@ -26,7 +26,7 @@
 }
 .list-group-item-check:checked + .list-group-item {
   color: #fff;
-  background-color: var(--bs-blue);
+  background-color: var(--bs-green);
 }
 .list-group-item-check[disabled] + .list-group-item,
 .list-group-item-check:disabled + .list-group-item {
@@ -58,4 +58,8 @@
   pointer-events: none;
   filter: none;
   opacity: .5;
+}
+
+.leftAlign {
+  text-align: left;
 }
