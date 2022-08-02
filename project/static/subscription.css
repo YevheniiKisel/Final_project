@@ -1,6 +1,7 @@
 .list-group {
   max-width: 460px;
-  margin: 4rem auto;
+  margin: 2rem auto;
+  flex-direction: row;
 }
 
 .form-check-input:checked + .form-checked-content {
@@ -63,3 +64,10 @@
 .leftAlign {
   text-align: left;
 }
+
+.tab.title .tab.header{
+  display: block;
+  max-width: 460px;
+  border-style: none;
+}
+
