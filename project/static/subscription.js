@@ -76,10 +76,6 @@ function validateStep(active) {
 }
 /////////////////////////////////////////////////////////////////////////////////////////// 
 
-//Pass values from submitted radiobuttons into placeholders into checkoout step
-
-let frequency = document.querySelector()
-document.getElementById("frequency").innerHTML = document.querySelector()
 
 
 
@@ -107,8 +103,11 @@ $( '#deliveryDate' ).flatpickr({
     "locale": {
         "firstDayOfWeek": 1 // set start day of week to Monday
     }
-
   });
 
+function checkout() {
+    let frequency = ($('input:radio[name="perWeek"]:checked').val());
+    $( '#frequency' ).text("frequency");
+}
 
 
