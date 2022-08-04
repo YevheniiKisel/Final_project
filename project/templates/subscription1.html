@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 
-{% block style %}
+{% block head %}
     <link rel="stylesheet" href="../static/subscription.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 {% endblock %}
 
 
@@ -10,15 +11,16 @@
     <!-- form where will be my qustionnaire-->
         <div class="container">
             <form action="/subscription" method="post">
+                
                 <!-- first step -->
-                <div class="step step-1">
+                <div class="step step-1 active"> 
                     <!-- headers to the first section-->
                     <div class="list-group">
                         <h3>Step 1</h3>
                         <h4>Choose frequensy</h4>
                     </div>
                     <!-- section with frequensy (delivery / per week)-->
-                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto">
+                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton">
                         <!-- first radio button <1 per week> -->
                         <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
                         <label class="list-group-item rounded-3 py-3" for="1perWeek">
@@ -44,7 +46,7 @@
                         <h4>Choose period</h4>
                     </div>
                     <!-- section with duration (how many month)-->
-                    <div class="list-group list-group-checkable d-flex justify-content-around flex-row gap-2 border-0 w-100 mb-5" >
+                    <div class="list-group list-group-checkable d-flex justify-content-around flex-row gap-2 border-0 w-100 mb-5 radioButton" >
                         <!-- first radio button <3 month> -->
                             <input type="radio" name="durationMonth" id="3month" class="list-group-item-check pe-none" value="3">
                             <label class="list-group-item rounded-3 py-3 d-inline-block " for="3month">
@@ -69,9 +71,98 @@
                                     <p>month</p>
                                 </div>
                             </label>
-                    </div>          
-                    <button class="btn btn-primary" type="button">Next</button>             
-                    
+                    </div>   
+                    <!-- buttons -->
+                    <div class="list-group">
+                        <button class="btn btn-primary btn-next" type="button">Next</button>             
+                    </div>       
+                </div>
+
+                <!------------------------------------------------------------------------------------------------------->
+
+                <!-- second step -->
+                <div class="step step-2 " >
+                    <!-- headers -->
+                    <div>
+                        <h3>Step 2</h3>
+                        <h4>Pick a first delivery date</h4>
+                    </div>
+                    <!-- date picker -->
+                    <div class="list-group mb-5">
+                        <input type="datetime-local" name="deliveryDate" id="deliveryDate" class="form-control" placeholder="Select a first date delivery...">
+                    </div>
+
+                    <!-- header -->
+                    <h4>Pick a delivery time*</h4>
+                    <!-- time picker-->
+                    <div class="list-group">
+                        <select name="deliveryTime" id="deliveryTime" class="form-select">
+                            <option selected disabled>Select preferred delivery time</option>
+                            <option value="09:00 AM">9:00 AM</option>
+                            <option value="05:00 PM">5:00 PM</option>
+                        </select>  
+                        <p><small>*delivery will take place within one hour of the selected time</small></p> 
+                    </div>
+
+                    <!-- buttons -->
+                    <div class="list-group d-flex justify-content-around flex-row">
+                        <button class="btn btn-secondary btn-previous" type="button">Previous</button>
+                        <button class="btn btn-primary btn-next" type="button">Next</button>                 
+                    </div>
+                </div>
+                <!-------------------------------------------------------------------------------------->
+
+                <!-- third step-->
+                <div class="step step-3">
+                    <!-- headers -->
+                    <div>
+                        <h3>Step 3</h3>
+                        <h4>Do you need die Blume x Fenek "Starter Pack"?</h4>
+                    </div>
+                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton">
+                        <!-- first radio button <Yes i need a starter pack> -->
+                        <input type="radio" name="starterPack" id="starterPack_Y" class="list-group-item-check pe-none" value="yes">
+                        <label class="list-group-item rounded-3 py-3" for="starterPack_Y">
+                            <div class="d-flex justify-content-between w-100">
+                                <h3>Starter Pack</h3>
+                                <small>+ 150 PLN</small>
+                            </div>
+                            <p class="leftAlign">Exclusive vase made by local ceramic artist Agnieszka Novak ("Fenek studio") </p>
+                        </label>
+
+                        <!-- second radio button <No, thank you>-->
+                        <input type="radio" name="starterPack" id="starterPack_N" class="list-group-item-check pe-none" value="no">
+                        <label class="list-group-item rounded-3 py-3" for="starterPack_N">
+                                <h3>No, thank you.</h3>
+                        </label>
+                    </div>
+
+                    <!-- buttons -->
+                    <div class="list-group d-flex justify-content-around flex-row">
+                        <button class="btn btn-secondary btn-previous" type="button">Previous</button>
+                        <button class="btn btn-primary btn-next" type="button">Checkout</button>                 
+                    </div>   
+                </div>
+                <!-------------------------------------------------------------------------------------->
+
+                <!-- Checkout -->
+                <div class="step step-3">
+                    <!-- Headers -->
+                    <div>
+                        <h3>Checkout</h3>
+                    </div> 
+                    <div class="list group">
+                        <p><strong>Subscription:</strong> <span id="frequency"></span> delivery weekly, for <span id="period"></span> month period</p>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
 
 
 
@@ -83,3 +174,9 @@
 
     {% endif %}
 {% endblock %}
+
+{% block addScript%}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="text/javascript" src="../static/subscription.js"></script>
+        {% endblock %}
