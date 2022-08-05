@@ -1,12 +1,38 @@
 {% extends "layout.html" %}
 
-
 {% block main %}
-    <h1>This is profile</h1>
-    {% if not name %}
-        <p>Hello there!</p>
-    {% else %}
-        <p>Hello, {{ name }}!</p>    
-    {% endif %}
-    <p>Here will be information about user`s orders, questions, Subsciption state</p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-success">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="container text-start">
+        {% if not name %}
+        <div>
+            <h1 class="text-center">Hello there!</h1>
+            <br>
+        </div>
+        {% else %}
+        <div>
+            <h1 class="text-center">Hello, {{ name }}!</h1>  
+            <br>  
+        </div>
+        {% endif %}
+        <div>
+            <h4>My orders</h4>
+            {% if deliveryTime %}
+                <h5>Subscription</h5>
+                <p>Next delivery will be <strong>{{ deliveryDate }}</strong> at <strong>{{ deliveryTime }} or within one hour.</strong></p>
+                <p>Delivery adress: {{ street }} {{ block }}, apartment nr {{ apartment }} </p>
+                {% if starterPack %}
+                <p>Oh, also don`t forget to find a nice place for you new vase, which will come with Starter Pack "die Blume X Fenek" :)</p>
+                {% endif %}
+            {% else %}
+                <h5>¯\_(ツ)_/¯ </h5>
+                <p>There is no orders...yet ;)</p>
+            </div>  
+            {% endif %}
+    </div>
 {% endblock %}

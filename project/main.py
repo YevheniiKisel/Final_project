@@ -39,16 +39,18 @@ def subscription_post():
     
     #create a new subscription record with data above
     new_subscripton = Subscription(user=current_user.id, delivery_PerWeek=deliveryPerWeek, subscription_Period=subscriptionPeriod, delivery_Date=deliveryDate, delivery_Time=deliveryTime, starter_Pack=starterPack)
-    new_subscripton.save()
 
     #create a new delivery record with data above
     new_delivery = Delivery_address(user=current_user.id, street=str, block=blck, apartment=apart, contact_Number=contactNumber)
-    new_delivery.save()
+
+    #Find out name of current user
+    name = current_user.name
 
     #pass flash, that said, that purchase was successful 
     flash("Purchase was successful!")
 
-    return render_template("profile.html", )
+    return render_template("profile.html", deliveryTime=deliveryTime, deliveryDate=deliveryDate, street=str, block=blck, apartment=apart, name=name, starterPack=starterPack)
+
 
 @main.route('/bouquet')
 def bouquet():
