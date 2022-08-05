@@ -20,7 +20,7 @@
                         <h4>Choose frequensy</h4>
                     </div>
                     <!-- section with frequensy (delivery / per week)-->
-                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton">
+                    <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton" required>
                         <!-- first radio button <1 per week> -->
                         <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
                         <label class="list-group-item rounded-3 py-3" for="1perWeek">
@@ -177,21 +177,21 @@
                                 <h3>Delivery address</h3>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Street</span>
-                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Block</span>
-                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Apartment</span>
-                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required>
                                 </div>
                             </div>
                         <div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Mob. number</span>
-                                <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" placeholder="+48">
+                                <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" placeholder="+48" required>
                             </div>
                         </div>
                         </div>
@@ -252,24 +252,13 @@
                     </div>
 
                     <hr class="my-4">
-                    
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-
-
-
+                    <div class="list-group d-flex justify-content-around flex-row">
+                        <button class="btn btn-secondary btn-previous" type="button">Back</button>
+                        <button class="btn btn-primary" type="submit">Pay</button>
+                    </div>
                 </div>
-
-
-
-
-
-
-
-
-
             </form>    
         </div>
-
     {% endif %}
 {% endblock %}
 

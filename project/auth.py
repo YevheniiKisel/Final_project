@@ -56,7 +56,7 @@ def sign_up_post():
         flash("Please confirm password.")
         return redirect(url_for('auth.sign_up')) # redirect if password confirmation field is empty
     elif not password==passwordConfirmation:
-        flash("Passwords don`t much! Please try again.")
+        flash("Passwords don`t match! Please try again.")
         return redirect(url_for('auth.sign_up')) # redirect if passwords don`t match
 
     # Check passed. Create a new user with form data
@@ -80,12 +80,4 @@ def sign_out():
 
 
 
-
-
-
-
-
-@auth.route('/signout')
-def logout():
-    return 'This is message on the log out page for authorized user'
 
