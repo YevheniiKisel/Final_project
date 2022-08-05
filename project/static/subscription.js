@@ -6,6 +6,7 @@ const steps = Array.from(document.querySelectorAll('form .step'));
 const nextButton = document.querySelectorAll('form .btn-next');
 const previousButton = document.querySelectorAll('form .btn-previous');
 const form = document.querySelector('form');
+const checkoutButton = document.querySelector('form .btn-next.btn-checkOut')
 
 // Function that change step to the next one
 nextButton.forEach(button=>{
@@ -63,7 +64,6 @@ function validateStep(active) {
     for (i = 0; i < divRadioInputs.length; i++) {
         let section = Array.from(divRadioInputs[i].getElementsByTagName('input'))
         for (j = 0; j < section.length; j++){
-            console.log(section[j]);
             if (section[j].checked){
                 break;
             }
@@ -91,6 +91,8 @@ function validateStep(active) {
 
 // Re-configure a calendar
 $( '#deliveryDate' ).flatpickr({
+    altInput: true,
+    altFormat: 'F j, Y',
     dateFormat: 'Y-m-d',
     minDate: 'today',
     maxDate: new Date().fp_incr(27),
@@ -105,9 +107,34 @@ $( '#deliveryDate' ).flatpickr({
     }
   });
 
-function checkout() {
-    let frequency = ($('input:radio[name="perWeek"]:checked').val());
-    $( '#frequency' ).text("frequency");
-}
+//Update checkout
+checkoutButton.addEventListener('click', function() {
+    // Place value into placeholders
+    let frequency = $('input:checked[name="perWeek"]').val() ;
+    $('#frequency').text(frequency);
+    let period = $('input:checked[name="durationMonth"]').val();
+    $('#period').text(period);
+    let date = $('#deliveryDate').val();
+    $('#date').text(date);
+    let time = $('#deliveryTime').val();
+    $('#time').text(time);
+    let starterPack = $('input:checked[name="starterPack"]').val();
+    $('#starterPack').text(starterPack);
+    //Calculate total
+    let total = 0;
+    //Add base prise
+    if (frequency == 1) {
+        total += 150;
+    }
+    else if (frequency == 2) {
+        total +=280;
+    }
+    // Add extras
+    if (starterPack == 'yes') {
+        total += 150;
+    }
+    $('#total').text(total);
+})
+
 
 

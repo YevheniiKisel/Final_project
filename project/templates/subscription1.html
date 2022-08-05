@@ -140,7 +140,7 @@
                     <!-- buttons -->
                     <div class="list-group d-flex justify-content-around flex-row">
                         <button class="btn btn-secondary btn-previous" type="button">Previous</button>
-                        <button class="btn btn-primary btn-next" type="button">Checkout</button>                 
+                        <button class="btn btn-primary btn-next btn-checkOut" type="button">Checkout</button>                 
                     </div>   
                 </div>
                 <!-------------------------------------------------------------------------------------->
@@ -151,12 +151,113 @@
                     <div>
                         <h3>Checkout</h3>
                     </div>
-                    <div class="list-group">
-                        <p><strong>Subscription:</strong> <span id="frequency"></span> delivery weekly,</p>
-
+                    <!-- Summary -->
+                    <div class="list-group text-start">
+                        <p><b>Subscription:</b> <span id="frequency"></span> delivery once weekly, for <span id="period"></span> month period.</p>
+                        <p><b>First delivery:</b> <span id="date"></span> at <span id="time"></span>.</p>
+                        <p><b>Starter Pack:</b> <span id="starterPack"></span>.</p>
                     </div>
+                    <hr>
+                    <p><h4>TOTAL:</h4> <span id="total"></span> PLN</p>
+                    <!-- buttons -->
+                    <div class="list-group d-flex justify-content-around flex-row">
+                        <button class="btn btn-secondary btn-previous" type="button">Back</button>
+                        <button class="btn btn-primary btn-next" type="button">Delivery adress & Payment</button>                 
+                    </div>   
                 </div>
+                <!-------------------------------------------------------------------------------------->
 
+                <!-- Delivery Address | Payment step -->
+                <div class="step step-5">
+                    <!-- Container for 2 boxes-->
+                    <div class=" d-flex justify-content-around flex-row">
+                        <!-- First box: Delivery address-->
+                        <div class="list-group">
+                            <div class="my-3">
+                                <h3>Delivery address</h3>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Street</span>
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Block</span>
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Apartment</span>
+                                    <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        <div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Mob. number</span>
+                                <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" placeholder="+48">
+                            </div>
+                        </div>
+                        </div>
+                        <!-- Second box: Payment checkout -->
+                        <div>
+                            <div class="list-group">
+                                <h3>Payment</h3>
+                                <div class="form-check">
+                                  <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                                  <label class="form-check-label" for="credit">Credit card</label>
+                                </div>
+                                <div class="form-check">
+                                  <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                                  <label class="form-check-label" for="debit">Debit card</label>
+                                </div>
+                                <div class="form-check">
+                                  <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                                  <label class="form-check-label" for="paypal">PayPal</label>
+                                </div>
+                            </div>
+                            <div class="list-group">   
+                                <div class="row gy-3">
+                                    <div class="col-md-6">
+                                    <label for="cc-name" class="form-label">Name on card</label>
+                                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                    <small class="text-muted">Full name as displayed on card</small>
+                                    <div class="invalid-feedback">
+                                        Name on card is required
+                                    </div>
+                                    </div>
+                        
+                                    <div class="col-md-6">
+                                    <label for="cc-number" class="form-label">Credit card number</label>
+                                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Credit card number is required
+                                    </div>
+                                    </div>
+                        
+                                    <div class="col-md-3">
+                                    <label for="cc-expiration" class="form-label">Expiration</label>
+                                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Expiration date required
+                                    </div>
+                                    </div>
+                        
+                                    <div class="col-md-3">
+                                    <label for="cc-cvv" class="form-label">CVV</label>
+                                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Security code required
+                                    </div>
+                                    </div>
+                                </div>  
+                              </div>         
+                        </div>   
+                    </div>
+
+                    <hr class="my-4">
+                    
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+
+
+
+                </div>
 
 
 
