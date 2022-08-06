@@ -16,7 +16,7 @@ class Subscription(db.Model):
     user = db.Column(db.Integer, db.ForeignKey('user.id'))
     delivery_PerWeek = db.Column(db.Integer)
     subscription_Period = db.Column(db.Integer)
-    delivery_Date = db.Column(db.DateTime)
+    delivery_Date = db.Column(db.String(20))
     delivery_Time = db.Column(db.String(10))
     starter_Pack = db.Column(db.String(10))
 
