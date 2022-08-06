@@ -7,11 +7,11 @@
 
 
 {% block main %}
+    
     {% if current_user.is_authenticated %}
     <!-- form where will be my qustionnaire-->
         <div class="container">
             <form action="/subscription" method="post">
-                
                 <!-- first step -->
                 <div class="step step-1 active"> 
                     <!-- headers to the first section-->
@@ -260,6 +260,29 @@
                 </div>
             </form>    
         </div>
+
+    {% else %}
+    <div class="container text-center" >
+        <div class="row justify-content-between" >
+            <div class="col">
+                <img class = "mw-100 mh-auto" src="./static/Subscription.JPG" alt="Flowers in vase on coffee table">
+            </div>
+            <div class="col-4">
+                <div class="list-group">
+                    <h3>Want to check our offer?</h3>
+                    <div class="d-grit gap-2 col-6 mx-auto">
+                        <p>Plese sign in</p>
+                        <button class="btn btn-primary btn-lg signIn" type="button">Sign in</button>  
+                        
+                    </div>
+                    <div class="mr-">
+                        <p>Don`t have an account?</p>
+                        <button class="btn btn-secondary btn-signUp" type="button">Sign up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endif %}
 {% endblock %}
 
