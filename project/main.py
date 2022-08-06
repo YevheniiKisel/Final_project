@@ -3,6 +3,7 @@ from crypt import methods
 from unicodedata import name
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy import insert
 from .models import Subscription, Delivery_address
 from . import db
 
@@ -15,7 +16,8 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template("profile.html", name = current_user.name)
+
+    return render_template("profile.html")
 
 @main.route('/subscription')
 def subscription():
@@ -42,6 +44,17 @@ def subscription_post():
 
     #create a new delivery record with data above
     new_delivery = Delivery_address(user=current_user.id, street=str, block=blck, apartment=apart, contact_Number=contactNumber)
+
+    #add data to db
+    insert_subscriptionData = insert(Subscription).values(
+        user=current_user.id, 
+        delivery_PerWeek=deliveryPerWeek, 
+        subscription_Period=subscriptionPeriod, 
+        delivery_Date=deliveryDate, 
+        delivery_Time=deliveryTime, 
+        starter_Pack=starterPack
+    )
+
 
     #Find out name of current user
     name = current_user.name
