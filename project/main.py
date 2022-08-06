@@ -3,9 +3,12 @@ from crypt import methods
 from unicodedata import name
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from sqlalchemy import insert
 from .models import Subscription, Delivery_address
 from . import db
+from sqlalchemy import func
+from sqlalchemy.dialects.mysql import insert
+from sqlalchemy.dialects import postgresql
+
 
 main = Blueprint('main', __name__)
 
@@ -39,13 +42,9 @@ def subscription_post():
     apart = request.form.get('apartment')
     contactNumber = request.form.get('contactNumber')
     
-    #create a new subscription record with data above
-    new_subscripton = Subscription(user=current_user.id, delivery_PerWeek=deliveryPerWeek, subscription_Period=subscriptionPeriod, delivery_Date=deliveryDate, delivery_Time=deliveryTime, starter_Pack=starterPack)
-
-    #create a new delivery record with data above
-    new_delivery = Delivery_address(user=current_user.id, street=str, block=blck, apartment=apart, contact_Number=contactNumber)
 
     #add data to db
+    # to the subscription table
     insert_subscriptionData = insert(Subscription).values(
         user=current_user.id, 
         delivery_PerWeek=deliveryPerWeek, 
@@ -54,6 +53,36 @@ def subscription_post():
         delivery_Time=deliveryTime, 
         starter_Pack=starterPack
     )
+    onDublicate__insert_subscriptionData = insert_subscriptionData.on_duplicate_key_update(
+        delivery_PerWeek=deliveryPerWeek, 
+        subscription_Period=subscriptionPeriod, 
+        delivery_Date=deliveryDate, 
+        delivery_Time=deliveryTime, 
+        starter_Pack=starterPack
+    )
+    print(onDublicate__insert_subscriptionData.compile(dialect=postgresql.dialect()))
+    db.session.execute(onDublicate__insert_subscriptionData)
+    db.session.commit()
+
+
+    # to the delivery table
+    insert_deliveryData = insert(Delivery_address).values(
+        user=current_user.id, 
+        street=str, 
+        block=blck, 
+        apartment=apart, 
+        contact_Number=contactNumber
+    )
+    onDublicate__insert_deliveryData = insert_deliveryData.on_duplicate_key_update(
+        street=str, 
+        block=blck, 
+        apartment=apart, 
+        contact_Number=contactNumber
+    )
+    print(onDublicate__insert_deliveryData.compile(dialect=postgresql.dialect()))
+    db.session.execute(onDublicate__insert_deliveryData)
+    db.session.commit()
+
 
 
     #Find out name of current user
