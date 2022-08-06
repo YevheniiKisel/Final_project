@@ -22,13 +22,16 @@
         {% endif %}
         <div>
             <h4>My orders</h4>
-            {% if deliveryTime %}
+            {% if subscriptions %}
                 <h5>Subscription</h5>
-                <p>Next delivery will be <strong>{{ deliveryDate }}</strong> at <strong>{{ deliveryTime }} or within one hour.</strong></p>
-                <p>Delivery adress: {{ street }} {{ block }}, apartment nr {{ apartment }} </p>
-                {% if starterPack %}
-                <p>Oh, also don`t forget to find a nice place for you new vase, which will come with Starter Pack "die Blume X Fenek" :)</p>
-                {% endif %}
+                <h6>Details</h6>
+                    <p>Next delivery will be <strong>{{ subscription.delivery_Date }}</strong> at <strong>{{ subscription.delivery_Time }} or within one hour.</strong></p>
+                    {% if starterPack %}
+                    <p>Oh, also don`t forget to find a nice place for you new vase, which will come with Starter Pack "die Blume X Fenek" :)</p>
+                    {% endif %}
+                <h6>Delivery</h6>
+                    <p>Delivery adress: {{ delivery.street }} {{ delivery.block }}, apartment nr {{ delivery.apartment }} </p>
+                    <p>Contact number: <strong>{{ delivery.contact_Number }}</strong></p>
             {% else %}
                 <h5>¯\_(ツ)_/¯ </h5>
                 <p>There is no orders...yet ;)</p>

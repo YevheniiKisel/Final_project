@@ -16,11 +16,17 @@ main = Blueprint('main', __name__)
 def index():
     return render_template("index.html")
 
-@main.route('/profile')
+@main.route('/profile', methods=["GET"])
 @login_required
 def profile():
+    user = current_user.id
+    user_name = current_user.name
+    User.query.filter_by(email=email).first()
+    User.query.filter_by(email=email).first()
+    subscriptions = db.execute("SELECT delivery_Date, delivery_Time, starter_Pack FROM subscription WHERE user = ?", user)
+    deliveries = db.execute("SELECT street, block, apartment WHERE user=?", user)
 
-    return render_template("profile.html")
+    return render_template("profile.html", subscriptions, deliveries,)
 
 @main.route('/subscription')
 def subscription():
