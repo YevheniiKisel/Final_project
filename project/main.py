@@ -14,11 +14,12 @@ main = Blueprint('main', __name__)
 
 @main.route('/delete')
 def delete():
+    # Get data from db about record we want to delete
     id = request.args.get('id')
     record_to_delete = Subscription_details.query.get(id)
     user = current_user.id
 
-
+    # try to delete it...
     try:
         db.session.delete(record_to_delete)
         db.session.commit()
@@ -27,13 +28,11 @@ def delete():
         flash("Record was deleted successfully!")
         return render_template('profile.html', subscriptions=subscriptions)
 
-
+    #...or show error
     except:
         subscriptions = Subscription_details.query.filter_by(user=user).all()
         flash("Whoops...Something went wrong, try again.")
         return render_template('profile.html', subscriptions=subscriptions)
-
-
 
 
 
@@ -45,7 +44,6 @@ def index():
 @login_required
 def profile():
     user = current_user.id
-    user_name = current_user.name
 
     # Query data from database
     subscriptions = Subscription_details.query.filter_by(user=user).all()

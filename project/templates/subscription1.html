@@ -18,7 +18,7 @@
                 <div class="col-4">
                     <form action="/subscription" method="post">
                         <!-- first step -->
-                        <div class="step step-1 active"> 
+                        <div class="step step-1"> 
                             <!-- headers to the first section-->
                             <div class="list-group">
                                 <h3>Step 1</h3>
@@ -173,7 +173,7 @@
                         <!-------------------------------------------------------------------------------------->
 
                         <!-- Delivery Address | Payment step -->
-                        <div class="step step-5" >
+                        <div class="step step-5 active">
                             <!-- Container for 2 boxes-->
                             <div class="justify-content-around">
                                 <!-- First box: Delivery address-->
@@ -207,16 +207,16 @@
                                     <div class="list-group">
                                         <h3>Payment</h3>
                                         <div class="form-check">
-                                        <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                                        <label class="form-check-label" for="credit">Credit card</label>
+                                            <input id="credit" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="credit">Credit card</label>
                                         </div>
                                         <div class="form-check">
-                                        <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-                                        <label class="form-check-label" for="debit">Debit card</label>
+                                            <input id="debit" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="debit">Debit card</label>
                                         </div>
                                         <div class="form-check">
-                                        <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-                                        <label class="form-check-label" for="paypal">PayPal</label>
+                                            <input id="paypal" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="paypal">PayPal</label>
                                         </div>
                                     </div>
                                     <div class="list-group">   
