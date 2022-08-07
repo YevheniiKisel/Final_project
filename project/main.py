@@ -99,7 +99,7 @@ def subscription_post():
 
 @main.route('/bouquet')
 def bouquet():
-    return "This is bouquet. TODO"
+    return render_template("bouquets.html")
 
 @main.route('/event')
 def event():
