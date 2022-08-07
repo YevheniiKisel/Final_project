@@ -28,3 +28,20 @@ class Delivery_address(db.Model):
     block = db.Column(db.String(10))
     apartment = db.Column(db.String(10))
     contact_Number = db.Column(db.String(20))
+
+class Subscription_details(db.Model):
+    __tablename__= 'subscrption_details'
+    id = db.Column(db.Integer, primary_key = True)
+    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    delivery_PerWeek = db.Column(db.Integer)
+    subscription_Period = db.Column(db.Integer)
+    delivery_Date = db.Column(db.String(20))
+    delivery_Time = db.Column(db.String(10))
+    starter_Pack = db.Column(db.String(10))
+    street = db.Column(db.String(100))
+    block = db.Column(db.String(10))
+    apartment = db.Column(db.String(10))
+    contact_Number = db.Column(db.String(20))
+
+
+

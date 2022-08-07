@@ -1,9 +1,9 @@
-from ast import Sub
+from ast import Sub, Subscript
 from crypt import methods
 from unicodedata import name
 from flask import Blueprint, flash, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Subscription, Delivery_address
+from .models import Subscription_details
 from . import db
 from sqlalchemy import func
 from sqlalchemy.dialects.mysql import insert
@@ -11,6 +11,31 @@ from sqlalchemy.dialects import postgresql
 
 
 main = Blueprint('main', __name__)
+
+@main.route('/delete')
+def delete():
+    id = request.args.get('id')
+    record_to_delete = Subscription_details.query.get(id)
+    user = current_user.id
+
+
+    try:
+        db.session.delete(record_to_delete)
+        db.session.commit()
+        subscriptions = Subscription_details.query.filter_by(user=user).all()
+
+        flash("Record was deleted successfully!")
+        return render_template('profile.html', subscriptions=subscriptions)
+
+
+    except:
+        subscriptions = Subscription_details.query.filter_by(user=user).all()
+        flash("Whoops...Something went wrong, try again.")
+        return render_template('profile.html', subscriptions=subscriptions)
+
+
+
+
 
 @main.route('/')
 def index():
@@ -21,12 +46,11 @@ def index():
 def profile():
     user = current_user.id
     user_name = current_user.name
-    User.query.filter_by(email=email).first()
-    User.query.filter_by(email=email).first()
-    subscriptions = db.execute("SELECT delivery_Date, delivery_Time, starter_Pack FROM subscription WHERE user = ?", user)
-    deliveries = db.execute("SELECT street, block, apartment WHERE user=?", user)
 
-    return render_template("profile.html", subscriptions, deliveries,)
+    # Query data from database
+    subscriptions = Subscription_details.query.filter_by(user=user).all()
+
+    return render_template('profile.html', subscriptions=subscriptions)
 
 @main.route('/subscription')
 def subscription():
@@ -43,31 +67,25 @@ def subscription_post():
     starterPack = request.form.get('starterPack')
 
     #data for Delivery table in database
-    str = request.form.get('steet')
+    str = request.form.get('street')
     blck = request.form.get('block')
     apart = request.form.get('apartment')
     contactNumber = request.form.get('contactNumber')
     
-    #add data to subscription table
-    new_subscription = Subscription(user=current_user.id, 
+    #add data to subscription_detail table
+    new_subscription = Subscription_details(user=current_user.id, 
         delivery_PerWeek=deliveryPerWeek, 
         subscription_Period=subscriptionPeriod, 
         delivery_Date=deliveryDate, 
         delivery_Time=deliveryTime, 
-        starter_Pack=starterPack
-    )
-    db.session.add(new_subscription)
-    db.session.commit()
-
-    #add data to delivery table
-    new_delivery = Delivery_address(user=current_user.id, 
+        starter_Pack=starterPack,
         street=str, 
         block=blck, 
         apartment=apart, 
         contact_Number=contactNumber
-    )
 
-    db.session.add(new_delivery)
+    )
+    db.session.add(new_subscription)
     db.session.commit()
 
     #Find out name of current user
@@ -76,7 +94,7 @@ def subscription_post():
     #pass flash, that said, that purchase was successful 
     flash("Purchase was successful!")
 
-    return render_template("profile.html", deliveryTime=deliveryTime, deliveryDate=deliveryDate, street=str, block=blck, apartment=apart, name=name, starterPack=starterPack)
+    return redirect(url_for('main.profile'))
 
 
 @main.route('/bouquet')
