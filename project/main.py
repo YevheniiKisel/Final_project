@@ -107,4 +107,4 @@ def event():
 
 @main.route('/contact')
 def contact():
-    return "This is contact. TODO"
+    return render_template("contacts.html")
