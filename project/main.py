@@ -103,7 +103,7 @@ def bouquet():
 
 @main.route('/event')
 def event():
-    return "This is event. TODO"
+    return render_template("event.html")
 
 @main.route('/contact')
 def contact():
