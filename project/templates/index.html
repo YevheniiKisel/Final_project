@@ -1,11 +1,45 @@
 {% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="../static/index.css">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
 
 
 {% block main %}
-<main class="container-fluid py-5 text-center">
+<main>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-inner">
 
-<h1>This is homepage</h1>
+      <div class="carousel-item active">
+        <img class = "position-absolute w-100 start-0" src="../static/Subscription.JPG" alt="flowers" style="top:-150%; opacity:0.9">
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>Flower subscription.</h1>
+            <p>For home, for business, for pleasure.</p>
+            <p><a class="btn btn-lg btn-primary" href="/subscription">Go to Subsciption</a></p>
+          </div>
+        </div>
+      </div>
 
-<p>Here will be background image hero-text</p>
+      <div class="carousel-item ">
+        <img class = "position-absolute w-100 start-0" src="../static/dieblumeXkopi.JPG" alt="flowers" style="top:-200%; opacity:0.9">
+        <div class="container">
+          <div class="carousel-caption text-start">
+            <h1>die Blume X KOPI</h1>
+            <p>Aesthetic collaboration for connoisseurs</p>
+            <p><a class="btn btn-lg btn-primary" href="https://www.instagram.com/dieblume.pl/">More info</a></p>
+          </div>
+        </div>
+      </div>
+
+    
+
+
 </main>
 {% endblock %}

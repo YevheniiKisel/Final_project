@@ -25,7 +25,7 @@ def sign_in_post():
     # check if user exist in database and if password was correct
     if not user or not check_password_hash(user.password, password):
         flash('Please check your credentials and try again')
-        return redirect(url_for('auth.sigh_in'), code=400) # if user doesn`t exist or password was incorrect - return error and redirect to m
+        return redirect(url_for('auth.sign_in'), code=400) # if user doesn`t exist or password was incorrect - return error and redirect to m
     else:
         login_user(user, remember=remember)
         return redirect(url_for('main.index')) # if user exists redirect to homepage
