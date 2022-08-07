@@ -67,9 +67,6 @@ def sign_up_post():
     db.session.add(new_user)
     db.session.commit()
 
-    # Inform user that register was complete successfully
-    flash("Your accound was successfully registred! Please Sign In with your email and password.", "success")
-
     # redirect user to a homepage
     return redirect(url_for('auth.sign_in'))
 
