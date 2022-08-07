@@ -1,0 +1,17 @@
+p.left {
+    text-align: left;
+}
+
+.tab {
+    border: 1px;
+    border-style: solid;
+    border-color: green;
+    padding: 24px;
+    min-width: fit-content;
+    float: right;
+}
+
+footer {
+    position: static;
+    bottom: 16px;
+}

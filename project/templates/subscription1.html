@@ -1,0 +1,295 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/subscription.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock %}
+
+
+{% block main %}
+    <div class="container text-center">
+        <div class="row justify-content-between" >
+            <div class="col">
+                <img class = "mw-100 mh-auto" src="./static/Subscription.JPG" alt="Flowers in vase on coffee table">
+            </div>
+            {% if current_user.is_authenticated %}
+            <!-- content for authorized user-->
+            <!-- form where will be my qustionnaire-->
+                <div class="col-4">
+                    <form action="/subscription" method="post">
+                        <!-- first step -->
+                        <div class="step step-1 active"> 
+                            <!-- headers to the first section-->
+                            <div class="list-group">
+                                <h3>Step 1</h3>
+                                <h4>Choose frequensy</h4>
+                            </div>
+                            <!-- section with frequensy (delivery / per week)-->
+                            <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton" required>
+                                <!-- first radio button <1 per week> -->
+                                <input type="radio" name="perWeek" id="1perWeek" class="list-group-item-check pe-none" value="1">
+                                <label class="list-group-item rounded-3 py-3" for="1perWeek">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <h3>1 delivery / week</h3>
+                                        <small>Base price: 150 PLN</small>
+                                    </div>
+                                    <p class="leftAlign">Good choise for home or as a present.</p>
+                                </label>
+                                <!-- second radio button <2 per week>-->
+                                    <input type="radio" name="perWeek" id="2perWeek" class="list-group-item-check pe-none" value="2">
+                                    <label class="list-group-item rounded-3 py-3" for="2perWeek">
+                                        <div class="d-flex justify-content-between w-100">
+                                            <h3>2 deliveries / week</h3>
+                                            <small>Base price: 280 PLN</small>
+                                        </div>
+                                        <p class="leftAlign">Pefrect solution for business</p>
+                                    </label>
+                            </div>
+                            
+                            <!-- headers to the second section-->
+                            <div class="list-group mt-5">
+                                <h4>Choose period</h4>
+                            </div>
+                            <!-- section with duration (how many month)-->
+                            <div class="list-group list-group-checkable d-flex justify-content-around flex-row gap-2 border-0 w-100 mb-5 radioButton" >
+                                <!-- first radio button <3 month> -->
+                                    <input type="radio" name="durationMonth" id="3month" class="list-group-item-check pe-none" value="3">
+                                    <label class="list-group-item rounded-3 py-3 d-inline-block " for="3month">
+                                        <div class="d-block justify-content-between w-100">
+                                            <h3>3</h3>
+                                            <p>month</p>
+                                        </div>
+                                    </label>
+                                <!-- second radio button <6 month> -->
+                                    <input type="radio" name="durationMonth" id="6month" class="list-group-item-check pe-none" value="6">
+                                    <label class="list-group-item rounded-3 py-3 d-inline-block" for="6month">
+                                        <div class="d-block justify-content-between w-100">
+                                            <h3>6</h3>
+                                            <p>month</p>
+                                        </div>
+                                    </label>
+                                <!-- third radio button <12 month> -->
+                                    <input type="radio" name="durationMonth" id="12month" class="list-group-item-check pe-none" value="12">
+                                    <label class="list-group-item rounded-3 py-3 d-inline-block" for="12month">
+                                        <div class="d-block justify-content-between w-100">
+                                            <h3>12</h3>
+                                            <p>month</p>
+                                        </div>
+                                    </label>
+                            </div>   
+                            <!-- buttons -->
+                            <div class="list-group">
+                                <button class="btn btn-primary btn-next" type="button">Next</button>             
+                            </div>       
+                        </div>
+
+                        <!------------------------------------------------------------------------------------------------------->
+
+                        <!-- second step -->
+                        <div class="step step-2 " >
+                            <!-- headers -->
+                            <div>
+                                <h3>Step 2</h3>
+                                <h4>Pick a first delivery date</h4>
+                            </div>
+                            <!-- date picker -->
+                            <div class="list-group mb-5">
+                                <input type="datetime-local" name="deliveryDate" id="deliveryDate" class="form-control" placeholder="Select a first date delivery...">
+                            </div>
+
+                            <!-- header -->
+                            <h4>Pick a delivery time*</h4>
+                            <!-- time picker-->
+                            <div class="list-group">
+                                <select name="deliveryTime" id="deliveryTime" class="form-select">
+                                    <option selected disabled>Select preferred delivery time</option>
+                                    <option value="09:00 AM">9:00 AM</option>
+                                    <option value="05:00 PM">5:00 PM</option>
+                                </select>  
+                                <p><small>*delivery will take place within one hour of the selected time</small></p> 
+                            </div>
+
+                            <!-- buttons -->
+                            <div class="list-group d-flex justify-content-around flex-row">
+                                <button class="btn btn-secondary btn-previous" type="button">Previous</button>
+                                <button class="btn btn-primary btn-next" type="button">Next</button>                 
+                            </div>
+                        </div>
+                        <!-------------------------------------------------------------------------------------->
+
+                        <!-- third step-->
+                        <div class="step step-3">
+                            <!-- headers -->
+                            <div>
+                                <h3>Step 3</h3>
+                                <h4>Do you need die Blume x Fenek "Starter Pack"?</h4>
+                            </div>
+                            <div class="list-group list-group-checkable d-grid gap-2 border-0 w-auto radioButton">
+                                <!-- first radio button <Yes i need a starter pack> -->
+                                <input type="radio" name="starterPack" id="starterPack_Y" class="list-group-item-check pe-none" value="yes">
+                                <label class="list-group-item rounded-3 py-3" for="starterPack_Y">
+                                    <div class="d-flex justify-content-between w-100">
+                                        <h3>Starter Pack</h3>
+                                        <small>+ 150 PLN</small>
+                                    </div>
+                                    <p class="leftAlign">Exclusive vase made by local ceramic artist Agnieszka Novak ("Fenek studio") </p>
+                                </label>
+
+                                <!-- second radio button <No, thank you>-->
+                                <input type="radio" name="starterPack" id="starterPack_N" class="list-group-item-check pe-none" value="no">
+                                <label class="list-group-item rounded-3 py-3" for="starterPack_N">
+                                        <h3>No, thank you.</h3>
+                                </label>
+                            </div>
+
+                            <!-- buttons -->
+                            <div class="list-group d-flex justify-content-around flex-row">
+                                <button class="btn btn-secondary btn-previous" type="button">Previous</button>
+                                <button class="btn btn-primary btn-next btn-checkOut" type="button">Checkout</button>                 
+                            </div>   
+                        </div>
+                        <!-------------------------------------------------------------------------------------->
+
+                        <!-- Check out -->
+                        <div class="step step-4">
+                            <!-- Headers -->
+                            <div>
+                                <h3>Checkout</h3>
+                            </div>
+                            <!-- Summary -->
+                            <div class="list-group text-start">
+                                <p><b>Subscription:</b> <span id="frequency"></span> delivery once weekly, for <span id="period"></span> month period.</p>
+                                <p><b>First delivery:</b> <span id="date"></span> at <span id="time"></span>.</p>
+                                <p><b>Starter Pack:</b> <span id="starterPack"></span>.</p>
+                            </div>
+                            <hr>
+                            <p><h4>TOTAL:</h4> <span id="total"></span> PLN</p>
+                            <!-- buttons -->
+                            <div class="list-group d-flex justify-content-around flex-row">
+                                <button class="btn btn-secondary btn-previous" type="button">Back</button>
+                                <button class="btn btn-primary btn-next" type="button">Delivery adress & Payment</button>                 
+                            </div>   
+                        </div>
+                        <!-------------------------------------------------------------------------------------->
+
+                        <!-- Delivery Address | Payment step -->
+                        <div class="step step-5">
+                            <!-- Container for 2 boxes-->
+                            <div class="justify-content-around">
+                                <!-- First box: Delivery address-->
+                                <div class="list-group">
+                                    <div class="my-3">
+                                        <h3>Delivery address</h3>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Street</span>
+                                            <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required name="street">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Block</span>
+                                            <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required name="block">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">Apartment</span>
+                                            <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" required name="apartment">
+                                        </div>
+                                    </div>
+                                <div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">Mob. number</span>
+                                        <input type="text" class="form-control" aria-label="street" aria-describedby="basic-addon1" placeholder="+48" required name="contactNumber">
+                                
+                                    </div>
+                                </div>
+                                </div>
+                                <hr>
+                                <!-- Second box: Payment checkout -->
+                                <div>
+                                    <div class="list-group">
+                                        <h3>Payment</h3>
+                                        <div class="form-check">
+                                            <input id="credit" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="credit">Credit card</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="debit" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="debit">Debit card</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input id="paypal" name="paymentMethod" type="radio" class="list-group-item-check pe-none" checked required>
+                                            <label class="list-group-item rounded-3 py-3" for="paypal">PayPal</label>
+                                        </div>
+                                    </div>
+                                    <div class="list-group">   
+                                        <div class="row gy-3">
+                                            <div class="col-md-6">
+                                            <label for="cc-name" class="form-label">Name on card</label>
+                                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                                            <small class="text-muted">Full name as displayed on card</small>
+                                            <div class="invalid-feedback">
+                                                Name on card is required
+                                            </div>
+                                            </div>
+                                
+                                            <div class="col-md-6">
+                                            <label for="cc-number" class="form-label">Credit card number</label>
+                                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                Credit card number is required
+                                            </div>
+                                            </div>
+                                
+                                            <div class="col-md-3">
+                                            <label for="cc-expiration" class="form-label">Expiration</label>
+                                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                Expiration date required
+                                            </div>
+                                            </div>
+                                
+                                            <div class="col-md-3">
+                                            <label for="cc-cvv" class="form-label">CVV</label>
+                                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                Security code required
+                                            </div>
+                                            </div>
+                                        </div>  
+                                    </div>         
+                                </div>   
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="list-group d-flex justify-content-around flex-row">
+                                <button class="btn btn-secondary btn-previous" type="button">Back</button>
+                                <button class="btn btn-primary btn-lg" type="submit">Pay</button>
+                            </div>
+                        </div>
+                    </form>    
+                </div>
+            {% else %}
+            <!-- Content for unauthorized users-->
+                    <div class="col-4 d-flex align-content-center">
+                        <div class="list-group">
+                            <h3>Want to check our offer?</h3>
+                            <div class="d-grit gap-2 col-6 mx-auto">
+                                <p>Plese sign in</p>
+                                <p><a class="btn btn-lg btn-primary" href="http://127.0.0.1:5000/signin">Sign in</a></p>
+                                
+                            </div>
+                            <div class="mr-">
+                                <p>Don`t have an account?</p>
+                                <p><a class="btn btn-lg btn-secondary" href="http://127.0.0.1:5000/signup">Sign up</a></p>
+                            </div>
+                        </div>
+                    </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block addScript%}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="text/javascript" src="../static/subscription.js"></script>
+        {% endblock %}
